@@ -31,12 +31,12 @@ const ConnectButton = () => {
 }
 
 const PageLayout = ({ children }) => (
-  <div className="container pb-12">
+  <div className="container pb-12"  style={{color:'white'}}>
     <div className="flex items-center justify-between pt-3 pb-16">
-      <div className="text-lg font-semibold">Azuro Betting Website</div>
+      <Link className="text-lg font-semibold" href="/">Normies | Powered by AZURO</Link>
       <div className="flex space-x-8">
-        <Link className="text-md" href="/">Events</Link>
-        <Link className="text-md" href="/bets-history">Bets History</Link>
+        {/* <Link className="text-md" href="/">Events</Link> */}
+        {/* <Link className="text-md" href="/bets-history">Bets History</Link> */}
       </div>
       <ConnectButton />
     </div>

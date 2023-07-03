@@ -40,11 +40,11 @@ const QUERY = `
   }
 `
 
-export default function useSportEvent() {
-  const { query } = useRouter()
+export default function useSportEventsModified(name) {
+    const query = name.id
   const { loading, data } = useQuery(gql`${QUERY}`, {
     variables: {
-      id: query.id,
+      id: query,
     },
   })
 

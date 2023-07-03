@@ -23,13 +23,13 @@ const QUERY = `
   }
 `
 
-export default function useSportEvents() {
+export default function useSportEvents(sportname) {
   return useQuery(gql`${QUERY}`, {
     variables: {
       where: {
         // note that the value of "startAt" is in seconds
         startsAt_gt: Math.floor(Date.now() / 1000),
-        sport_: { name: 'Football' },
+        sport_: { name: sportname },
       },
     },
   })

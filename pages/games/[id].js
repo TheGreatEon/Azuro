@@ -1,8 +1,9 @@
 import dayjs from 'dayjs'
 import useSportEvent from '@/hooks/useSportEvent'
 import { useState } from 'react'
+import Image from 'next/image'
 import PlaceBetModal from '@/components/PlaceBetModal'
-
+import loadingGIF from '../../styles/LoadingF.gif'
 const ParticipantLogo = ({ image, name }) => (
   <div className="flex flex-col items-center">
     <div className="flex items-center justify-center w-20 h-20 border border-gray-300 rounded-full">
@@ -13,7 +14,7 @@ const ParticipantLogo = ({ image, name }) => (
 )
 
 const GameInfo = ({ sport, league, participants, startsAt }) => (
-  <div className="flex flex-col items-center pt-6 pb-8 border border-gray-300 rounded-lg">
+  <div className="flex flex-col items-center pt-6 pb-8 border border-gray-300 rounded-lg" style={{color:'white'}}>
     <div className="flex flex-col items-center text-md">
       <div>{sport.name}</div>
       <div className="mt-2 text-gray-500">
@@ -46,9 +47,9 @@ const Markets = ({ game, markets }) => {
       <div className="max-w-[600px] mx-auto mt-12 space-y-6">
         {
           markets.map(({ marketName, outcomes: row }) => (
-            <div key={marketName} className="">
+            <div key={marketName} className="" >
               <div className="mb-2 font-semibold">{marketName}</div>
-              <div className="space-y-1">
+              <div className="space-y-1" style={{color:'black'}}>
                 {
                   row.map((outcomes, index) => (
                     <div key={index} className="flex justify-between">
@@ -92,11 +93,15 @@ export default function Game() {
   const { loading, game, markets } = useSportEvent()
 
   if (loading) {
-    return <div>Loading...</div>
+    return <main style={{display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',}}>
+     <Image src={loadingGIF} height={700} width={700} />
+    </main>
   }
 
   return (
-    <main>
+    <main style={{color:'white'}}>
       <GameInfo {...game} />
       <Markets game={game} markets={markets} />
     </main>

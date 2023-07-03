@@ -62,9 +62,10 @@ const PlaceBetModal = ({ game, outcome, closeModal }) => {
         <span className="text-md font-semibold">-</span>
       </div>
       <div className="flex items-center justify-between">
-        <span className="text-md text-gray-400">Bet amount</span>
+        <span className="text-md text-black-400">Bet amount</span>
         <input
-          className="w-[121px] py-2 px-4 border border-gray-400 text-md text-right font-semibold rounded-md"
+          className="w-[121px] py-2 px-4 border border-gray-400 text-md  text-black-400 text-right font-semibold rounded-md"
+          style={{color:'black'}}
           type="number"
           placeholder="Bet amount"
           value={amount}
@@ -101,6 +102,7 @@ const PlaceBetModal = ({ game, outcome, closeModal }) => {
     >
       <div
         className="w-[400px] bg-white overflow-hidden rounded-xl shadow-2xl"
+        style={{background:'linear-gradient(to right bottom, #0D131C, #132133)'}}
         onClick={(event) => event.stopPropagation()}
       >
         <GameInfo game={game} />
