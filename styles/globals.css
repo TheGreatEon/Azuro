@@ -26,11 +26,11 @@
 }
 
 .box {
-  border: double 4px transparent;
-  padding: 25px;
+  border: double 3px transparent;
+  padding: 10px;
   margin: 10px;
   border-radius: 25px;
-  background-image: linear-gradient(rgb(3, 9, 30), rgb(19, 27, 119)), radial-gradient(circle at top left, rgb(157, 0, 255),#0b00a2, rgb(157, 0, 255),#0b00a2, rgb(157, 0, 255),#0b00a2, rgb(157, 0, 255),#0b00a2);
+  background-image: linear-gradient(#161629, #161629), radial-gradient(circle at top left, rgb(157, 0, 255),#0b00a2, rgb(157, 0, 255),#0b00a2, rgb(157, 0, 255),#0b00a2, rgb(157, 0, 255),#0b00a2);
   background-origin: border-box;
   background-clip: padding-box, border-box;
 }
@@ -39,9 +39,11 @@
   padding: 10px;
   margin: 1px;
   border-radius: 10px;
-  border:2px rgb(32, 6, 39) solid;
+  border:2px #2B254A solid;
   color: azure;
-  background-color: rgb(0, 0, 0);
+  background-color: #070512;
+  font-size: smaller;
+  min-width: 100px;
 }
 .gamebuttonactive {
   padding: 10px;
@@ -49,5 +51,10 @@
   border-radius: 10px;
   color: azure;
   font-weight: bolder;
-  background-color: rgb(87, 6, 91);
+  background-color: rgb(105,34,255);
+}
+
+.area {
+  display:table-cell;
+  vertical-align:middle; 
 }

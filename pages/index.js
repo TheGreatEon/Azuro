@@ -25,11 +25,11 @@ const Markets = ({ game, markets }) => {
 
   return (
     <>
-      <div className="">
+      <div className="flex justify-between" >
         {
           markets.map(({ marketName, outcomes: row }) => (
             <div key={marketName} className="" >
-              <div className="mb-2 font-semibold">{marketName}</div>
+              {/* <div className="mb-2 font-semibold">{marketName}</div> */}
               <div className="space-y-1" style={{color:'black'}}>
                 {
                   row.map((outcomes, index) => (
@@ -39,12 +39,12 @@ const Markets = ({ game, markets }) => {
                           outcomes.map((outcome) => (
                             <div
                               key={outcome.selectionName}
-                              className="flex justify-between py-2 px-3 bg-gray-200 rounded-md cursor-pointer hover:bg-gray-300 transition"
+                              className="flex justify-between py-2 px-3 bg-gray-200 rounded-md cursor-pointer hover:bg-gray-300 transition gamebutton"
                               style={{ width: `calc(100% / ${outcomes.length})` }}
                               onClick={() => handleOutcomeClick(outcome)}
                             >
-                              <span className="text-gray-500">{outcome.selectionName}</span>
-                              <span className="font-medium">{parseFloat(outcome.odds).toFixed(2)}</span>
+                              <span className="text-gray-500" style={{padding:'2px', margin:'2px'}}>{outcome.selectionName}</span>
+                              <span className="font-medium"  style={{padding:'2px', margin:'2px'}}>{parseFloat(outcome.odds).toFixed(2)}</span>
                             </div>
                           ))
                         }
@@ -77,35 +77,40 @@ const GameCard = ({ id, sport, league, participants, startsAt }) => {
 
   return (
   <div className='box'>
-  <div>
-  <div
-    // className="p-4 border border-gray-300 rounded-lg hover:bg-gray-100 transition"
-  >
-    <div className="flex justify-between text-sm"  style={{color:'white'}}>
-      <span>{sport.name}</span>
+    <div className="flex justify-between text-sm"  style={{color:'white', width:'100%'}}>
+      {/* <span>{sport.name}</span> */}
       <span>{league.country.name} &middot; {league.name}</span>
       <span>{dayjs(startsAt * 1000).format('DD MMM HH:mm')}</span>
     </div>
-    <div className="">
+    <div className="flex justify-between text-sm" style={{padding:'2px', with:'full', margin:'3px'}}>
+      <div className='flex'>
       {
         participants.map(({ image, name }) => (
-          <div key={name} className="flex items-center"  style={{color:'white'}}>
+          <div key={name} className="flex items-center"  style={{color:'white', marginRight:'15px'}}>
             <div style={{padding:'2px'}}>
-              <img className="w-10 h-10" src={image} alt={name} />
+              {image? <img className="w-12 h-12" src={image} alt={name} /> : <></>}
+              
             </div>
             <span className="text-md">{name}</span>
           </div>
         ))
       }
-    </div>
-    <div>
-      <div style={{textAlign:"end", width:'20', height:'40', color:"white"}}>
-            <Link href={`/games/${id}`} style={{border:'2px solid white', padding:'10px', borderRadius:'10px', margin:'2px', background:'linear-gradient( 70deg, blue, purple)'}}> {'MORE BETS'} </Link>
       </div>
+      <div className='flex justify-between text-sm' style={{width:'40%'}}>
+      <div style={{width:'full'} } className="area">
       {account? <Markets game={game} markets={markets? markets.slice(0,1): []}/>: <></>}
+      </div>
+            <div className='area'>
+            {account?
+            <div className="flex items-center" style={{padding:'2px', color:'white'}}>
+                  <Link href={`/games/${id}`} className='gamebutton'> {'MORE BETS ⏭️'} </Link>
+            </div>: 
+            <></>
+      }
+      </div>
+            </div>
+            
     </div>
-  </div>
-  </div>
   </div>
 )
     }
@@ -184,9 +189,21 @@ export default function Home() {
 
   
   return (
-    <main style={{boxShadow:"-1px -1px 4px 4px black", padding:'10px', borderRadius:'10px', background:'#0F1319', display:'flex'}}> 
+    <div style={{textAlign:'center'}}>
+      <div style={{margin:'130px'}}>
+      <div style={{margin:'-30px'}}>
+      <span style={{fontSize:'70px', fontFamily:'fantasy'}}>{"The "}</span> 
+      <span style={{fontSize:'70px', color:'#6A23FF', fontFamily:'fantasy'}}>On-Chain</span>
+      </div>
+      <div>
+      <span style={{fontSize:'70px', fontFamily:'fantasy'}}>{"Crypro "}</span> 
+      <span style={{fontSize:'70px', fontFamily:'fantasy'}}>BookMake</span>
+      </div>
+      </div>
+    <main style={{display:'flex'}}> 
+    
     <div style={{width:'75%'}}>
-      <Slideshow />
+      {/* <Slideshow /> */}
       {/* className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2" */}
       <div style={{textAlign:'center', boxShadow:'-1px -1px 3px 3px linear-gradient(to right bottom, #132133, #0D131C)', borderRadius:'10px', margin:'10px'}}>
         {games_list.map((gamename) => (
@@ -205,11 +222,11 @@ export default function Home() {
             </div>  
         ))}
       </div>
-        <div style={{color:'white', textAlign:'center', background:'#401624', alignItems:'center', width:'full', borderRadius:'15px', padding:'5px', margin:'6px', boxShadow:'1px 1px 1px 1px black'}}>
+        {/* <div style={{color:'white', textAlign:'center', background:'#401624', alignItems:'center', width:'full', borderRadius:'15px', padding:'5px', margin:'6px', boxShadow:'1px 1px 1px 1px black'}}>
           <label>
             {theGame}
           </label>
-        </div>
+        </div> */}
         {data1 &&
           data1.games.map((game) => (
             <GameCard key={game.id} {...game} />
@@ -225,5 +242,6 @@ export default function Home() {
         <BetsHistory />
         </div>
     </main>
+    </div>
   )
 }
