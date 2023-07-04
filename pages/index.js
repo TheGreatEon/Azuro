@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { useEthers } from '@usedapp/core'
 import dayjs from 'dayjs'
 import useSportEvents from '@/hooks/useSportEvents'
 import useSportEvent from '@/hooks/useSportEvent'
@@ -24,7 +25,7 @@ const Markets = ({ game, markets }) => {
 
   return (
     <>
-      <div className="max-w-[600px] mx-auto mt-12 space-y-6">
+      <div className="">
         {
           markets.map(({ marketName, outcomes: row }) => (
             <div key={marketName} className="" >
@@ -71,28 +72,25 @@ const Markets = ({ game, markets }) => {
 
 
 const GameCard = ({ id, sport, league, participants, startsAt }) => {
-  const { loading, game, markets } = useSportEvent()
-  console.log("game", markets)
+  const { loading, game, markets } = useSportEventsModified(id)
+  const { account } = useEthers()
   return (
-  <div style={{alignItems:'center', width:'full', borderRadius:'15px', padding:'10px', margin:'6px', boxShadow:'1px 1px 1px 1px black', background:'linear-gradient(to right bottom, #0D131C, #132133)'}}>
+  <div className='box'>
   <div>
-  <Link
+  <div
     // className="p-4 border border-gray-300 rounded-lg hover:bg-gray-100 transition"
-    href={`/games/${id}`}
   >
     <div className="flex justify-between text-sm"  style={{color:'white'}}>
       <span>{sport.name}</span>
+      <span>{league.country.name} &middot; {league.name}</span>
       <span>{dayjs(startsAt * 1000).format('DD MMM HH:mm')}</span>
     </div>
-    <div className="mt-2 text-sm text-gray-400">
-      {league.country.name} &middot; {league.name}
-    </div>
-    <div className="mt-3 space-y-1">
+    <div className="">
       {
         participants.map(({ image, name }) => (
           <div key={name} className="flex items-center"  style={{color:'white'}}>
-            <div className="flex items-center justify-center w-8 h-8 mr-2 border border-gray-300 rounded-full">
-              <img className="w-4 h-4" src={image} alt={name} />
+            <div style={{padding:'2px'}}>
+              <img className="w-10 h-10" src={image} alt={name} />
             </div>
             <span className="text-md">{name}</span>
           </div>
@@ -100,9 +98,12 @@ const GameCard = ({ id, sport, league, participants, startsAt }) => {
       }
     </div>
     <div>
-
+      <div style={{textAlign:"end", width:'20', height:'40', color:"white"}}>
+            <Link href={`/games/${id}`} style={{border:'2px solid white', padding:'10px', borderRadius:'10px', margin:'2px', background:'linear-gradient( 70deg, blue, purple)'}}> {'MORE BETS'} </Link>
+      </div>
+      {account? <Markets game={game} markets={markets? markets.slice(0,1): []}/>: <></>}
     </div>
-  </Link>
+  </div>
   </div>
   </div>
 )
