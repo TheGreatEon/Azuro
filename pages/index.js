@@ -74,6 +74,7 @@ const Markets = ({ game, markets }) => {
 const GameCard = ({ id, sport, league, participants, startsAt }) => {
   const { loading, game, markets } = useSportEventsModified(id)
   const { account } = useEthers()
+
   return (
   <div className='box'>
   <div>
@@ -167,6 +168,16 @@ export default function Home() {
   } 
 
   const games_list = ["Football", "Baseball", "Rugby", "MMA", "Boxing", "Basketball", "Tennis", "Ice Hockey"]
+  const emojis = {
+    Football: '⚽',
+    Baseball: '⚾',
+    Rugby: '🏉',
+    MMA: '🥊',
+    Boxing: '🥊',
+    Basketball: '🏀',
+    Tennis:'🎾',
+    "Ice Hockey": '🏒'
+  }
   function handleGameChange(name) {
     setTheGame(name)
   }
@@ -181,11 +192,13 @@ export default function Home() {
         {games_list.map((gamename) => (
             <div style={{display:'inline-block'}}>
               { gamename == theGame ?
-              <button style={{margin:'10px', color:'white', margin:'10px', fontWeight:'bolder', fontSize:'18px'}} onClick={() => handleGameChange(gamename)}>
+              <button className='gamebuttonactive' onClick={() => handleGameChange(gamename)}>
+                {emojis[gamename]}
                 {gamename}
               </button> 
               :
-              <button style={{margin:'10px', color:'white', margin:'10px', color:'gray'}} onClick={() => handleGameChange(gamename)}>
+              <button className='gamebutton' onClick={() => handleGameChange(gamename)}>
+                {emojis[gamename]}
                 {gamename}
               </button> 
               } 

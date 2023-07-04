@@ -29,8 +29,25 @@
   border: double 4px transparent;
   padding: 25px;
   margin: 10px;
-  border-radius: 50px;
+  border-radius: 25px;
   background-image: linear-gradient(rgb(3, 9, 30), rgb(19, 27, 119)), radial-gradient(circle at top left, rgb(157, 0, 255),#0b00a2, rgb(157, 0, 255),#0b00a2, rgb(157, 0, 255),#0b00a2, rgb(157, 0, 255),#0b00a2);
   background-origin: border-box;
   background-clip: padding-box, border-box;
+}
+
+.gamebutton {
+  padding: 10px;
+  margin: 1px;
+  border-radius: 10px;
+  border:2px rgb(32, 6, 39) solid;
+  color: azure;
+  background-color: rgb(0, 0, 0);
+}
+.gamebuttonactive {
+  padding: 10px;
+  margin: 1px;
+  border-radius: 10px;
+  color: azure;
+  font-weight: bolder;
+  background-color: rgb(87, 6, 91);
 }
