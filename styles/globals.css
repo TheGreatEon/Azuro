@@ -41,9 +41,20 @@
   border-radius: 10px;
   border:2px #2B254A solid;
   color: azure;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.6s;
   background-color: #070512;
   font-size: smaller;
   min-width: 100px;
+}
+
+.gamebutton:hover {
+  padding: 10px;
+  margin: 1px;
+  border-radius: 10px;
+  color: azure;
+  font-weight: bolder;
+  background-color: rgb(105,34,255);
 }
 .gamebuttonactive {
   padding: 10px;

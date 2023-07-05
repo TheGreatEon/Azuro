@@ -39,8 +39,8 @@ const Markets = ({ game, markets }) => {
                           outcomes.map((outcome) => (
                             <div
                               key={outcome.selectionName}
-                              className="flex justify-between py-2 px-3 bg-gray-200 rounded-md cursor-pointer hover:bg-gray-300 transition gamebutton"
-                              style={{ width: `calc(100% / ${outcomes.length})` }}
+                              className="flex justify-between py-2 px-3 bg-gray-200 rounded-md cursor-pointer transition gamebutton"
+                              style={{ width: `200px` }}
                               onClick={() => handleOutcomeClick(outcome)}
                             >
                               <span className="text-gray-500" style={{padding:'2px', margin:'2px'}}>{outcome.selectionName}</span>
@@ -96,7 +96,7 @@ const GameCard = ({ id, sport, league, participants, startsAt }) => {
         ))
       }
       </div>
-      <div className='flex justify-between text-sm' style={{width:'40%'}}>
+      <div className='flex justify-between text-sm' style={{width:'60%'}}>
       <div style={{width:'full'} } className="area">
       {account? <Markets game={game} markets={markets? markets.slice(0,1): []}/>: <></>}
       </div>
@@ -162,7 +162,7 @@ export default function Home() {
   const [theGame, setTheGame] = useState('Football');
   const { loading, data } = useSportEvents('Baseball')
   const { loading:loading1, data:data1 } = useSportEvents(theGame)
-  
+  console.log("game", data)
 
   if (loading || loading1) {
     return <main style={{display: 'flex',
