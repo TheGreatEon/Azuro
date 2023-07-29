@@ -197,7 +197,7 @@ export default function Home() {
       <style>
       @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
       </style>
-      <div style={{margin:''}}>
+      <div>
       <span className='textwithfont' style={{fontSize:'70px'}}>{"The "}</span> 
       <span className='textwithfont' style={{fontSize:'70px', color:'#6A23FF'}}>On-Chain</span>
       </div>
@@ -205,6 +205,7 @@ export default function Home() {
       <span className='textwithfont' style={{fontSize:'70px'}}>{"Crypro "}</span> 
       <span className='textwithfont' style={{fontSize:'70px'}}>BookMake</span>
       </div>
+      
     </div>
     <main className={account ? 'mainalignment justify-between' : ''}> 
     <div>
