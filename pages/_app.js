@@ -4,7 +4,7 @@ import { DAppProvider, Polygon, useEthers } from '@usedapp/core'
 import Link from 'next/link'
 import stars from '../styles/background.svg'
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
-import { useState } from 'react'
+import homeimage from '../styles/home.png'
 
 const apolloClient = new ApolloClient({
   uri: 'https://thegraph.azuro.org/subgraphs/name/azuro-protocol/azuro-api-polygon',
@@ -39,10 +39,8 @@ const PageLayout = ({ children }) => {
   <div  style={{color:'white', backgroundColor:'rgb(7,5,18)', backgroundImage: `url('${stars.src}')`}}>
     <div className={account ? 'container': 'container'} >
     <div className="flex items-center justify-between pt-3 pb-16">
-      <Link className="text-lg font-semibold" href="/">Normies | Powered by AZURO</Link>
+      <Link className="text-lg font-semibold" href="/"><img src={homeimage.src}></img></Link>
       <div className="flex space-x-8">
-        {/* <Link className="text-md" href="/">Events</Link> */}
-        {/* <Link className="text-md" href="/bets-history">Bets History</Link> */}
       </div>
       <ConnectButton />
     </div>
