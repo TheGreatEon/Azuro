@@ -39,12 +39,12 @@ const Markets = ({ game, markets }) => {
                           outcomes.map((outcome) => (
                             <div
                               key={outcome.selectionName}
-                              className="flex justify-between py-2 px-3 bg-gray-200 rounded-md cursor-pointer transition gamebutton"
-                              style={{ width: `200px` }}
+                              className="flex justify-between bg-gray-200 rounded-md cursor-pointer transition gamebutton"
+                              style={{ width: `190px`, height:'45px'}}
                               onClick={() => handleOutcomeClick(outcome)}
                             >
-                              <span className="text-gray-500" style={{padding:'2px', margin:'2px'}}>{outcome.selectionName}</span>
-                              <span className="font-medium"  style={{padding:'2px', margin:'2px'}}>{parseFloat(outcome.odds).toFixed(2)}</span>
+                              <span className="text-gray-500" >{outcome.selectionName}</span>
+                              <span className="font-medium"  >{parseFloat(outcome.odds).toFixed(2)}</span>
                             </div>
                           ))
                         }
@@ -86,7 +86,7 @@ const GameCard = ({ id, sport, league, participants, startsAt }) => {
       <div className='flex'>
       {
         participants.map(({ image, name }) => (
-          <div key={name} className="flex items-center"  style={{color:'white', marginRight:'15px'}}>
+          <div key={name} className="flex items-center"  style={{color:'white', marginRight:'15px', fontSize:'13px', fontWeight:'bold'}}>
             <div style={{padding:'2px'}}>
               {image? <img className="w-12 h-12" src={image} alt={name} /> : <></>}
               
@@ -96,14 +96,14 @@ const GameCard = ({ id, sport, league, participants, startsAt }) => {
         ))
       }
       </div>
-      <div className='flex justify-between text-sm' style={{width:'60%'}}>
+      <div className='justify-between text-sm'>
       <div style={{width:'full'} } className="area">
       {account? <Markets game={game} markets={markets? markets.slice(0,1): []}/>: <></>}
       </div>
             <div className='area'>
             {account?
             <div className="flex items-center" style={{padding:'2px', color:'white'}}>
-                  <Link href={`/games/${id}`} className='gamebutton'> {'MORE BETS ⏭️'} </Link>
+                  <Link href={`/games/${id}`} className='gamebutton'> {'MORE ⏭️'} </Link>
             </div>: 
             <></>
       }
@@ -183,28 +183,31 @@ export default function Home() {
     Tennis:'🎾',
     "Ice Hockey": '🏒'
   }
+  const { account } = useEthers()
   function handleGameChange(name) {
     setTheGame(name)
   }
 
   
   return (
+    
     <div style={{textAlign:'center'}}>
-      <div style={{margin:'130px'}}>
-      <div style={{margin:'-30px'}}>
-      <span style={{fontSize:'70px', fontFamily:'fantasy'}}>{"The "}</span> 
-      <span style={{fontSize:'70px', color:'#6A23FF', fontFamily:'fantasy'}}>On-Chain</span>
+      <div className='diamond'></div>
+      <div>
+      <style>
+      @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+      </style>
+      <div style={{margin:''}}>
+      <span className='textwithfont' style={{fontSize:'70px'}}>{"The "}</span> 
+      <span className='textwithfont' style={{fontSize:'70px', color:'#6A23FF'}}>On-Chain</span>
       </div>
       <div>
-      <span style={{fontSize:'70px', fontFamily:'fantasy'}}>{"Crypro "}</span> 
-      <span style={{fontSize:'70px', fontFamily:'fantasy'}}>BookMake</span>
+      <span className='textwithfont' style={{fontSize:'70px'}}>{"Crypro "}</span> 
+      <span className='textwithfont' style={{fontSize:'70px'}}>BookMake</span>
       </div>
-      </div>
-    <main style={{display:'flex'}}> 
-    
-    <div style={{width:'75%'}}>
-      {/* <Slideshow /> */}
-      {/* className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2" */}
+    </div>
+    <main className={account ? 'mainalignment justify-between' : ''}> 
+    <div>
       <div style={{textAlign:'center', boxShadow:'-1px -1px 3px 3px linear-gradient(to right bottom, #132133, #0D131C)', borderRadius:'10px', margin:'10px'}}>
         {games_list.map((gamename) => (
             <div style={{display:'inline-block'}}>
@@ -222,25 +225,20 @@ export default function Home() {
             </div>  
         ))}
       </div>
-        {/* <div style={{color:'white', textAlign:'center', background:'#401624', alignItems:'center', width:'full', borderRadius:'15px', padding:'5px', margin:'6px', boxShadow:'1px 1px 1px 1px black'}}>
-          <label>
-            {theGame}
-          </label>
-        </div> */}
         {data1 &&
           data1.games.map((game) => (
             <GameCard key={game.id} {...game} />
           ))
         }
         </div>
-        <div style={{width:'25%'}}>
-        <div style={{color:'white', textAlign:'center', background:'#401624', alignItems:'center', width:'full', borderRadius:'15px', padding:'5px', margin:'6px', boxShadow:'1px 1px 1px 1px black'}}>
-          <label>
+        {account ? <div className='slip'>
+          <div style={{alignItems:'center', width:'full', borderRadius:'15px', padding:'10px', margin:'8px', background:'rgb(105,34,255)'}}>
             Bets
-          </label>
-        </div>
-        <BetsHistory />
-        </div>
+          </div>
+
+          <div className='history'><BetsHistory /></div>
+        
+        </div> : <></>}
     </main>
     </div>
   )

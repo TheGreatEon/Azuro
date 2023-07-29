@@ -2,7 +2,9 @@ import '@/styles/globals.css'
 import * as ethers from 'ethers'
 import { DAppProvider, Polygon, useEthers } from '@usedapp/core'
 import Link from 'next/link'
+import stars from '../styles/background.svg'
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
+import { useState } from 'react'
 
 const apolloClient = new ApolloClient({
   uri: 'https://thegraph.azuro.org/subgraphs/name/azuro-protocol/azuro-api-polygon',
@@ -22,16 +24,20 @@ const ConnectButton = () => {
   const { account, deactivate, activateBrowserWallet } = useEthers()
 
   // 'account' being undefined means that user is not connected
-  const title = account ? 'Disconnect' : 'Connect'
+  const title = account ? 'Disconnect Wallet' : 'Connect Wallet'
   const action = account ? deactivate : activateBrowserWallet
+  
 
   return (
-    <button className="button" onClick={() => action()}>{title}</button>
+    <button className="connectbutton" onClick={() => action()}>{title}</button>
   )
 }
 
-const PageLayout = ({ children }) => (
-  <div className="container pb-12"  style={{color:'white'}}>
+const PageLayout = ({ children }) => {
+  const { account } = useEthers()
+  return (
+  <div  style={{color:'white', backgroundColor:'rgb(7,5,18)', backgroundImage: `url('${stars.src}')`}}>
+    <div className={account ? 'container': 'container'} >
     <div className="flex items-center justify-between pt-3 pb-16">
       <Link className="text-lg font-semibold" href="/">Normies | Powered by AZURO</Link>
       <div className="flex space-x-8">
@@ -41,8 +47,10 @@ const PageLayout = ({ children }) => (
       <ConnectButton />
     </div>
     {children}
+    </div>
   </div>
-)
+  )
+}
 
 export default function App({ Component, pageProps }) {
   return (

@@ -16,44 +16,28 @@ const BetInfo = ({ data }) => {
   const selectionName = getSelectionName({ outcomeId: outcome.outcomeId, dictionaries })
   const {redeem} = useRedeemBet({tokeId:betId})
   return (
-    <div className="w-full py-4 px-6" style={{background:"black"}}>
-      <div className="text-md text-gray-600">
-        {dayjs(+createdAt * 1000).format('DD MMMM YYYY HH:mm')}
-      </div>
+    <div className="justify-between">
       <div className="">
-        <div>
-          <div className="text-gray-400">Bet Type</div>
-          <div className="mt-1 font-semibold">{marketName}</div>
-        </div>
-        <div>
-          <div className="text-gray-400">Side</div>
-          <div className="mt-1 font-semibold">{selectionName}</div>
-        </div>
-        <div>
-          <div className="text-gray-400">Odds</div>
-          <div className="mt-1 font-semibold">{parseFloat(odds).toFixed(4)}</div>
-        </div>
-        <div>
-          <div className="text-gray-400">Bet Amount</div>
-          <div className="mt-1 font-semibold">{+parseFloat(amount).toFixed(2)} USDT</div>
+        {/* {<div>
+          <div className="text-gray-400">Amount</div>
+          <div className="mt-1 font-semibold">{+parseFloat(amount).toFixed(2)} $</div>
         </div>
       </div>
       <div >
         <div>
-          <div className="text-gray-400">Possible Win</div>
+          <div className="text-gray-400">Win</div>
           <div className="mt-1 font-semibold">
-            {+parseFloat(potentialPayout).toFixed(2)} USDT
+            {+parseFloat(potentialPayout).toFixed(2)} $
           </div>
-        </div>
-        <div>
-          <div className="text-gray-400">Status</div>
-          <div className="mt-1 font-semibold">
+        </div>} */}
+        <div className="flex justify-between">
+          <div >
             {
               isResolved ? (
                 isWin ? (
-                  <span className="text-green-600">Win</span>
+                  <span className="text-green-600">Won {+parseFloat(potentialPayout).toFixed(2)} $</span>
                 ) : (
-                  <span className="text-gray-400">Lose</span>
+                  <span className="text-red-400">Lost {+parseFloat(amount).toFixed(2)} $</span>
                 )
 
               ) : (
@@ -69,14 +53,14 @@ const BetInfo = ({ data }) => {
           {
               isResolved ? (
                 isRedeemed ? (
-                  <span className="text-green-600">Redeemed</span>
+                  <span className="text-green-600">✔️</span>
                 ) : (
-                  isWin ? (<button onClick={redeem}>REDEEM</button>) :(<></>)
+                  isWin ? (<button className='gamebutton' onClick={redeem}>REDEEM</button>) :(<></>)
                 )
 
               ) : (
                 isCanceled ? (
-                  <span className="text-red-700">Canceled</span>
+                  <span className="text-orange-700">Canceled</span>
                 ) : (
                   <span className="text-yellow-500">Pending</span>
                 )
@@ -90,22 +74,17 @@ const BetInfo = ({ data }) => {
 }
 
 const GameInfo = ({ game }) => (
-  <div className="w-full py-4 px-6 ">
+  <div className="w-full">
     <div className="flex justify-between text-md">
-      <span>{game.sport.name}</span>
+      <span style={{color:'rgb(105,34,255)'}}>{game.sport.name}</span>
       <span>{dayjs(game.startsAt * 1000).format('DD MMM HH:mm')}</span>
     </div>
-    <div className="mt-1 text-md text-gray-400">
-      {game.league.country.name} &middot; {game.league.name}
-    </div>
-    <div className="mt-3 space-y-2">
+    
+    <div className="flex justify-between space-x-2">
       {
         game.participants.map(({ image, name }) => (
-          <div key={name} className="flex items-center">
-            <div className="flex items-center justify-center w-8 h-8 mr-2 border border-gray-300 rounded-full">
-              <img className="w-4 h-4" src={image} alt={name} />
-            </div>
-            <span className="text-md">{name}</span>
+          <div key={name} className="justify-between">
+            <span style={{fontSize:'13px'}}>{name}</span>
           </div>
         ))
       }
@@ -130,13 +109,14 @@ export default function BetsHistory() {
   }
 
   return (
-    <div style={{color:'white', textAlign:'center', background:'#401624', alignItems:'center', width:'full', borderRadius:'15px', padding:'5px', margin:'6px', boxShadow:'1px 1px 1px 1px black'}}>
+    <div>
       {
         data?.bets.map((bet) => (
           <div
             key={bet.id}
+            className='font'
             // className="grid grid-cols-[auto_minmax(400px,520px)] justify-items-start bg-gray-50 border border-gray-200 overflow-hidden rounded-xl"
-          style={{alignItems:'center', width:'full', borderRadius:'15px', padding:'10px', margin:'6px', boxShadow:'1px 1px 1px 1px black', background:'linear-gradient(to right bottom, #0D131C, #132133)'}}
+          style={{alignItems:'center', width:'full', borderRadius:'15px', padding:'10px', margin:'8px', background:'black'}}
           >
             <GameInfo game={bet.game} />
             <BetInfo data={bet} />
