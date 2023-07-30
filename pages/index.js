@@ -197,13 +197,14 @@ export default function Home() {
       <style>
       @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
       </style>
-      <div>
-      <span className='textwithfont' style={{fontSize:'70px'}}>{"The "}</span> 
-      <span className='textwithfont' style={{fontSize:'70px', color:'#6A23FF'}}>On-Chain</span>
+      <div>  
+      <span className='textwithfont' style={{fontSize:'45px', color:'#6A23FF'}}>{"NormieBet"}</span> 
       </div>
       <div>
-      <span className='textwithfont' style={{fontSize:'70px'}}>{"Crypro "}</span> 
-      <span className='textwithfont' style={{fontSize:'70px'}}>BookMake</span>
+      <span className='textwithfont' style={{fontSize:'45px'}}>{"On-Chain Crypto Bookie"}</span>
+      </div>
+      <div>
+      <span className='textwithfont' style={{fontSize:'45px'}}>'No Signup'</span>
       </div>
       
     </div>
