@@ -62,7 +62,7 @@ export default function useBetsHistory() {
 
   return useQuery(gql`${QUERY}`, {
     variables: {
-      first: 10, // in this tutorial, only 10 bets are loaded. In production, pagination loading should be implemented to avoid heavy requests which can lead to GraphQL errors
+      first: 40, // in this tutorial, only 10 bets are loaded. In production, pagination loading should be implemented to avoid heavy requests which can lead to GraphQL errors
       where: {
         actor: account?.toLowerCase(),
       },
