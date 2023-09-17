@@ -44,7 +44,7 @@ const Markets = ({ game, markets }) => {
                               onClick={() => handleOutcomeClick(outcome)}
                             >
                               <span className="text-gray-500" >{outcome.selectionName}</span>
-                              <span className="font-medium"  >{parseFloat(outcome.odds).toFixed(2)}</span>
+                              <span className="font-medium"  >{parseFloat(outcome.currentOdds).toFixed(2)}</span>
                             </div>
                           ))
                         }
@@ -97,13 +97,16 @@ const GameCard = ({ id, sport, league, participants, startsAt }) => {
       }
       </div>
       <div className='justify-between text-sm'>
-      <div className="area">
-      <Markets game={game} markets={markets? markets.slice(0,1): []}/>
+      <div style={{width:'full'} } className="area">
+      {account? <Markets game={game} markets={markets? markets.slice(0,1): []}/>: <></>}
       </div>
             <div className='area'>
+            {account?
             <div className="flex items-center" style={{padding:'2px', color:'white'}}>
                   <Link href={`/games/${id}`} className='gamebutton'> {'MORE ⏭️'} </Link>
-            </div>
+            </div>: 
+            <></>
+      }
       </div>
             </div>
             

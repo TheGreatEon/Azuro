@@ -95,7 +95,7 @@ const GameInfo = ({ game }) => (
 export default function BetsHistory() {
   const { account } = useEthers()
   const { loading, data } = useBetsHistory()
-
+  // console.log("dataa", data)
   if (!account) {
     return (
       <div className="mt-6 py-4 text-md text-center bg-red-200 rounded-md">

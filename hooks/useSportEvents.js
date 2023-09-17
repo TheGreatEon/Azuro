@@ -24,6 +24,7 @@ const QUERY = `
 `
 
 export default function useSportEvents(sportname) {
+  console.log(Date.now() / 1000)
   return useQuery(gql`${QUERY}`, {
     variables: {
       first: 50,

@@ -29,7 +29,7 @@ const QUERY = `
         outcomes {
           id
           outcomeId
-          odds
+          currentOdds
         }
         core {
           address
@@ -62,7 +62,7 @@ export default function useSportEvent() {
       dictionaries,
     })
   }
-
+  console.log(markets)
   return {
     loading,
     game,

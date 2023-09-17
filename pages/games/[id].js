@@ -63,7 +63,7 @@ const Markets = ({ game, markets }) => {
                               onClick={() => handleOutcomeClick(outcome)}
                             >
                               <span className="text-gray-500">{outcome.selectionName}</span>
-                              <span className="font-medium">{parseFloat(outcome.odds).toFixed(2)}</span>
+                              <span className="font-medium">{parseFloat(outcome.currentOdds).toFixed(2)}</span>
                             </div>
                           ))
                         }

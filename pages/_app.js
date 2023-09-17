@@ -7,7 +7,7 @@ import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
 import homeimage from '../styles/home.png'
 
 const apolloClient = new ApolloClient({
-  uri: 'https://thegraph.azuro.org/subgraphs/name/azuro-protocol/azuro-api-polygon',
+  uri: 'https://thegraph.azuro.org/subgraphs/name/azuro-protocol/azuro-api-polygon-v3',
   cache: new InMemoryCache(),
 })
 
