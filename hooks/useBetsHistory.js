@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client'
 import { useEthers } from '@usedapp/core'
-
+ 
 const QUERY = `
   query BetsHistory($first: Int, $where: Bet_filter!) {
     bets(
@@ -56,13 +56,13 @@ const QUERY = `
     }
   }
 `
-
+ 
 export default function useBetsHistory() {
   const { account } = useEthers()
-
+ 
   return useQuery(gql`${QUERY}`, {
     variables: {
-      first: 40, // in this tutorial, only 10 bets are loaded. In production, pagination loading should be implemented to avoid heavy requests which can lead to GraphQL errors
+      first: 50, // in this tutorial, only 10 bets are loaded. In production, pagination loading should be implemented to avoid heavy requests which can lead to GraphQL errors
       where: {
         actor: account?.toLowerCase(),
       },

@@ -16,7 +16,7 @@ const config = {
   readOnlyUrls: {
     // in this tutorial we use Ankr public RPC. It's free and has it's own limits
     // in the production version with a large number of users, we do not recommend using it
-    [Polygon.chainId]: new ethers.providers.StaticJsonRpcProvider('https://rpc.ankr.com/polygon'),
+    [Polygon.chainId]: new ethers.providers.StaticJsonRpcProvider('https://rpc.ankr.com/polygon/8ad80e4efbc64c4ed4ba467e4fea2c07b7b83e64bd0249fb6cb8e6f3588779c8'),
   },
 }
 
