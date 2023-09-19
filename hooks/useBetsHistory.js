@@ -17,40 +17,24 @@ const QUERY = `
       status
       isRedeemed
       odds
+      result
       createdAt: createdBlockTimestamp
       txHash: createdTxHash
-      outcome {
+      _games {
         id
-        outcomeId
-        condition {
-          id
-          conditionId
-          wonOutcome {
-            outcomeId
-          }
-          core {
-            address
-            liquidityPool {
-              address
-            }
-          }
-        }
-      }
-      game {
-        id
-        sport {
-          name
-        }
-        league {
-          name
-          country {
-            name
-          }
-        }
         participants {
           name
           image
         }
+        sport {
+            name
+          }
+          league {
+            name
+            country {
+              name
+            }
+          }
         startsAt
       }
     }
@@ -62,7 +46,7 @@ export default function useBetsHistory() {
  
   return useQuery(gql`${QUERY}`, {
     variables: {
-      first: 50, // in this tutorial, only 10 bets are loaded. In production, pagination loading should be implemented to avoid heavy requests which can lead to GraphQL errors
+      first: 10, // in this tutorial, only 10 bets are loaded. In production, pagination loading should be implemented to avoid heavy requests which can lead to GraphQL errors
       where: {
         actor: account?.toLowerCase(),
       },

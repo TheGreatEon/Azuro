@@ -6,14 +6,11 @@ import useBetsHistory from '@/hooks/useBetsHistory'
 import useRedeemBet from '@/hooks/useRedeemBet'
 
 const BetInfo = ({ data }) => {
-  const { id, betId, amount, potentialPayout, status, isRedeemed, odds, createdAt, txHash, outcome } = data
-
-  const isWin = outcome.outcomeId === outcome.condition.wonOutcome?.outcomeId
+  const { id, betId, amount, potentialPayout, status, isRedeemed, odds, createdAt, txHash, result } = data
+  const isWin = result === "Won"
   const isResolved = status === 'Resolved'
   const isCanceled = status === 'Canceled'
 
-  const marketName = getMarketName({ outcomeId: outcome.outcomeId, dictionaries })
-  const selectionName = getSelectionName({ outcomeId: outcome.outcomeId, dictionaries })
   const {redeem} = useRedeemBet({tokeId:betId})
   return (
     <div className="justify-between">
@@ -74,6 +71,7 @@ const BetInfo = ({ data }) => {
 }
 
 const GameInfo = ({ game }) => (
+  
   <div className="w-full">
     <div className="flex justify-between text-md">
       <span style={{color:'rgb(105,34,255)'}}>{game.sport.name}</span>
@@ -118,7 +116,7 @@ export default function BetsHistory() {
             // className="grid grid-cols-[auto_minmax(400px,520px)] justify-items-start bg-gray-50 border border-gray-200 overflow-hidden rounded-xl"
           style={{alignItems:'center', width:'full', borderRadius:'15px', padding:'10px', margin:'8px', background:'black'}}
           >
-            <GameInfo game={bet.game} />
+            <GameInfo game={bet._games[0]} />
             <BetInfo data={bet} />
           </div>
         ))

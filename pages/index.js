@@ -98,10 +98,10 @@ const GameCard = ({ id, sport, league, participants, startsAt }) => {
       </div>
       <div className='justify-between text-sm'>
       <div style={{width:'full'} } className="area">
-      {account? <Markets game={game} markets={markets? markets.slice(0,1): []}/>: <></>}
+      {true? <Markets game={game} markets={markets? markets.slice(0,1): []}/>: <></>}
       </div>
             <div className='area'>
-            {account?
+            {true?
             <div className="flex items-center" style={{padding:'2px', color:'white'}}>
                   <Link href={`/games/${id}`} className='gamebutton'> {'MORE ⏭️'} </Link>
             </div>: 
