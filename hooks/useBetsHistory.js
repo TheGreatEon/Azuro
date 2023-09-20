@@ -20,6 +20,12 @@ const QUERY = `
       result
       createdAt: createdBlockTimestamp
       txHash: createdTxHash
+      core {
+        address
+        liquidityPool {
+          address
+        }
+      }
       _games {
         id
         participants {

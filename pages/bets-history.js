@@ -11,7 +11,7 @@ const BetInfo = ({ data }) => {
   const isResolved = status === 'Resolved'
   const isCanceled = status === 'Canceled'
 
-  const {redeem} = useRedeemBet({tokeId:betId})
+  const {redeem} = useRedeemBet({bet:data})
   return (
     <div className="justify-between">
       <div className="">
