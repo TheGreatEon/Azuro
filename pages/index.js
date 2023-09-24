@@ -23,13 +23,16 @@ const Markets = ({ game, markets }) => {
     setSelectedOutcome(null)
   }
 
+  const name_dict = {"Team 1": 0, "Team 2": 1, "X": 2, "1": 0, "2": 1,}
+
   return (
     <>
       <div className="flex justify-between" >
         {
           markets.map(({ marketName, outcomes: row }) => (
+            
             <div key={marketName} className="" >
-              {/* <div className="mb-2 font-semibold">{marketName}</div> */}
+              <div className="mb-2 font-semibold">{marketName}</div>
               <div className="space-y-1" style={{color:'black'}}>
                 {
                   row.map((outcomes, index) => (
@@ -43,7 +46,8 @@ const Markets = ({ game, markets }) => {
                               style={{ width: `190px`, height:'45px'}}
                               onClick={() => handleOutcomeClick(outcome)}
                             >
-                              <span className="text-gray-500" >{outcome.selectionName}</span>
+                              {/* game.participants[name_dict[outcome.selectionName]]?.name */}
+                              <span className="text-gray-500" >{game.participants[name_dict[outcome.selectionName]]?.name? game.participants[name_dict[outcome.selectionName]]?.name : "X" }</span>
                               <span className="font-medium"  >{parseFloat(outcome.currentOdds).toFixed(2)}</span>
                             </div>
                           ))
@@ -78,8 +82,8 @@ const GameCard = ({ id, sport, league, participants, startsAt }) => {
   return (
   <div className='box'>
     <div className="flex justify-between text-sm"  style={{color:'white', width:'100%'}}>
-      {/* <span>{sport.name}</span> */}
-      <span>{league.country.name} &middot; {league.name}</span>
+      <span>{sport.name}</span>
+      {/* <span>{league.country.name} &middot; {league.name}</span> */}
       <span>{dayjs(startsAt * 1000).format('DD MMM HH:mm')}</span>
     </div>
     <div className="flex justify-between text-sm" style={{padding:'2px', with:'full', margin:'3px'}}>
@@ -180,8 +184,7 @@ export default function Home() {
     MMA: '🥊',
     Boxing: '🥊',
     Basketball: '🏀',
-    Tennis:'🎾',
-    "Ice Hockey": '🏒'
+    Tennis:'🎾'
   }
   const { account } = useEthers()
   function handleGameChange(name) {

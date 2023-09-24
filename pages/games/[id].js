@@ -41,7 +41,7 @@ const Markets = ({ game, markets }) => {
   const handleModalClose = () => {
     setSelectedOutcome(null)
   }
-
+  const name_dict = {"Team 1": 0, "Team 2": 1, "X": 2, "1": 0, "2": 1}
   return (
     <>
       <div className="max-w-[600px] mx-auto mt-12 space-y-6">
@@ -62,7 +62,7 @@ const Markets = ({ game, markets }) => {
                               style={{ width: `calc(100% / ${outcomes.length})` }}
                               onClick={() => handleOutcomeClick(outcome)}
                             >
-                              <span className="text-gray-500">{outcome.selectionName}</span>
+                              <span className="text-gray-500" >{game.participants[name_dict[outcome.selectionName]]?.name? game.participants[name_dict[outcome.selectionName]]?.name : outcome.selectionName }</span>
                               <span className="font-medium">{parseFloat(outcome.currentOdds).toFixed(2)}</span>
                             </div>
                           ))

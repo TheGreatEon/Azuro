@@ -41,6 +41,7 @@ const QUERY = `
 `
 
 export default function useSportEventsModified(name) {
+  console.log(name)
     const query = name
   const { loading, data } = useQuery(gql`${QUERY}`, {
     variables: {
