@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { useEthers } from '@usedapp/core'
 import dayjs from 'dayjs'
 import useSportEvents from '@/hooks/useSportEvents'
-import useSportEvent from '@/hooks/useSportEvent'
 import useSportEventsModified from '@/hooks/useSportEventsModified'
 import PlaceBetModal from '@/components/PlaceBetModal'
 import { useState } from 'react'
@@ -22,7 +21,6 @@ const Markets = ({ game, markets }) => {
   const handleModalClose = () => {
     setSelectedOutcome(null)
   }
-
   const name_dict = {"Team 1": 0, "Team 2": 1, "X": 2, "1": 0, "2": 1,}
 
   return (
@@ -162,7 +160,7 @@ const Slideshow = () => {
 
 
 export default function Home() {
-
+  const [ betHist, setBestHist ] = useState(true) 
   const [theGame, setTheGame] = useState('Football');
   const { loading, data } = useSportEvents('Baseball')
   const { loading:loading1, data:data1 } = useSportEvents(theGame)
@@ -237,11 +235,17 @@ export default function Home() {
         }
         </div>
         {account ? <div className='slip'>
-          <div style={{alignItems:'center', width:'full', borderRadius:'15px', padding:'10px', margin:'8px', background:'rgb(105,34,255)'}}>
-            Bets
+          <div style={{alignItems:'center', width:'full', borderRadius:'15px', padding:'4px', margin:'4px', border:'1px solid rgb(155,94,255)'}}>
+            <button className='gamebutton' onClick={() => setBestHist(true)}>
+              Bets
+            </button> 
+            <button className='gamebutton' onClick={() => setBestHist(false)}>
+              UnRedeem Bets
+            </button> 
           </div>
-
-          <div className='history'><BetsHistory /></div>
+          {betHist ? <div className='history'><BetsHistory false/></div> 
+          :
+          <div className='history'><BetsHistory true /></div>}
         
         </div> : <></>}
     </main>

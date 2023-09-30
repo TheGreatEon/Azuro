@@ -57,7 +57,7 @@ const BetInfo = ({ data }) => {
 
               ) : (
                 isCanceled ? (
-                  <span className="text-orange-700">Canceled</span>
+                  (<button className='gamebutton' onClick={redeem}>REDEEM</button>)
                 ) : (
                   <span className="text-yellow-500">Pending</span>
                 )
@@ -90,9 +90,16 @@ const GameInfo = ({ game }) => (
   </div>
 )
 
-export default function BetsHistory() {
+export default function BetsHistory(betHist) {
   const { account } = useEthers()
-  const { loading, data } = useBetsHistory()
+  var hist = true
+  if (betHist.true) {
+    hist = false
+  }
+  else {
+    hist = true
+  }
+  const { loading, data } = useBetsHistory(hist)
   console.log("dataa", data)
   if (!account) {
     return (

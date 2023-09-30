@@ -47,16 +47,31 @@ const QUERY = `
   }
 `
  
-export default function useBetsHistory() {
+export default function useBetsHistory(betHist) {
   const { account } = useEthers()
- 
-  return useQuery(gql`${QUERY}`, {
-    variables: {
-      first: 10, // in this tutorial, only 10 bets are loaded. In production, pagination loading should be implemented to avoid heavy requests which can lead to GraphQL errors
-      where: {
-        actor: account?.toLowerCase(),
+  console.log("bet hist", betHist)
+  if (betHist) {
+    return useQuery(gql`${QUERY}`, {
+      variables: {
+        first: 50, // in this tutorial, only 10 bets are loaded. In production, pagination loading should be implemented to avoid heavy requests which can lead to GraphQL errors
+        where: {
+          actor: account?.toLowerCase(),
+        },
       },
-    },
-    skip: !account,
-  })
+      skip: !account,
+    })
+  } else {
+    return useQuery(gql`${QUERY}`, {
+      variables: {
+        first: 50, // in this tutorial, only 10 bets are loaded. In production, pagination loading should be implemented to avoid heavy requests which can lead to GraphQL errors
+        where: {
+          actor: account?.toLowerCase(),
+          isRedeemed: betHist,
+          result: 'Won'
+        },
+      },
+      skip: !account,
+    })
+  }
+  
 }
