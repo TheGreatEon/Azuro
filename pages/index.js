@@ -182,7 +182,8 @@ export default function Home() {
     MMA: '🥊',
     Boxing: '🥊',
     Basketball: '🏀',
-    Tennis:'🎾'
+    Tennis:'🎾',
+    'Ice Hockey':'🏒'
   }
   const { account } = useEthers()
   function handleGameChange(name) {

@@ -3,7 +3,8 @@ import { gql, useQuery } from '@apollo/client'
 // this query retrieves data for 10 upcoming events that have not yet started
 const QUERY = `
   query Games($where: Game_filter!) {
-    games(first: 50, where: $where) {
+    games(first: 50, where: $where, orderBy: startsAt
+      , orderDirection: asc) {
       id
       sport {
         name
