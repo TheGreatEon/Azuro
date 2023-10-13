@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import dictt from "../../dictionaries/outcomes.json"
 import useSportEvent from '@/hooks/useSportEvent'
 import { useState } from 'react'
 import Image from 'next/image'
@@ -12,7 +13,6 @@ const ParticipantLogo = ({ image, name }) => (
     <span className="max-w-[210px] mt-3 text-lg text-center">{name}</span>
   </div>
 )
-
 const GameInfo = ({ sport, league, participants, startsAt }) => (
   <div className="flex flex-col items-center pt-6 pb-8 border border-gray-300 rounded-lg" style={{color:'white'}}>
     <div className="flex flex-col items-center text-md">
@@ -62,7 +62,7 @@ const Markets = ({ game, markets }) => {
                               style={{ width: `calc(100% / ${outcomes.length})` }}
                               onClick={() => handleOutcomeClick(outcome)}
                             >
-                              <span className="text-gray-500" >{game.participants[name_dict[outcome.selectionName]]?.name? game.participants[name_dict[outcome.selectionName]]?.name : outcome.selectionName }</span>
+                              <span className="text-gray-500" >{game.participants[name_dict[outcome.selectionName]]?.name? game.participants[name_dict[outcome.selectionName]]?.name : dictt[parseInt(outcome.outcomeId)]['_comment'] }</span>
                               <span className="font-medium">{parseFloat(outcome.currentOdds).toFixed(2)}</span>
                             </div>
                           ))

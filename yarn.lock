@@ -38,7 +38,7 @@
 
 "@azuro-org/toolkit@^2.0.0":
   version "2.0.0"
-  resolved "https://registry.npmjs.org/@azuro-org/toolkit/-/toolkit-2.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/@azuro-org/toolkit/-/toolkit-2.0.0.tgz#b69d11a4169dd0d16eb7c0e972d4b29eee7c5930"
   integrity sha512-s2T3eELDgjbKOCugBiPgvQNXgqbqNNFU95tT+QsetHEGu1ESYarJxuumZyrtYyrW4yDdWS0iy/JqAY4IzJuRag==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.16.0":

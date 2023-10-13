@@ -164,7 +164,6 @@ export default function Home() {
   const [theGame, setTheGame] = useState('Football');
   const { loading, data } = useSportEvents('Baseball')
   const { loading:loading1, data:data1 } = useSportEvents(theGame)
-  console.log("game", data)
 
   if (loading || loading1) {
     return <main style={{display: 'flex',

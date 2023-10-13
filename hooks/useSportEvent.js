@@ -62,7 +62,6 @@ export default function useSportEvent() {
       dictionaries,
     })
   }
-  console.log(markets)
   return {
     loading,
     game,
