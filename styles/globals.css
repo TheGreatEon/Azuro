@@ -63,6 +63,34 @@
   background-color: rgb(105,34,255);
 }
 
+.gameTimebutton {
+  padding: 5px;
+  margin: 1px;
+  border-radius: 10px;
+  border:2px #2B254A solid;
+  color: azure;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.6s;
+  background-color: #070512;
+  font-size: smaller;
+  min-width: 50px;
+}
+
+.gameTimebutton:hover {
+  padding: 5px;
+  margin: 1px;
+  border-radius: 10px;
+  color: azure;
+  background-color: rgb(105,34,255);
+}
+.gameTimebuttonactive {
+  padding: 5px;
+  margin: 1px;
+  border-radius: 10px;
+  color: azure;
+  background-color: rgb(105,34,255);
+}
+
 .area {
   display:table-cell;
   vertical-align:middle; 

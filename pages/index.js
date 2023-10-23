@@ -11,6 +11,8 @@ import { Slide } from 'react-slideshow-image';
 import loadingGIF from 'styles/LoadingF.gif'
 import BetsHistory from './bets-history'
 
+
+
 const Markets = ({ game, markets }) => {
   const [ selectedOutcome, setSelectedOutcome ] = useState(null)
 
@@ -73,48 +75,55 @@ const Markets = ({ game, markets }) => {
 }
 
 
-const GameCard = ({ id, sport, league, participants, startsAt }) => {
+const GameCard = ({ id, sport, league, participants, startsAt, minStartTime, maxStartTime}) => {
   const { loading, game, markets } = useSportEventsModified(id)
   const { account } = useEthers()
-
-  return (
-  <div className='box'>
-    <div className="flex justify-between text-sm"  style={{color:'white', width:'100%'}}>
-      <span>{sport.name}</span>
-      {/* <span>{league.country.name} &middot; {league.name}</span> */}
-      <span>{dayjs(startsAt * 1000).format('DD MMM HH:mm')}</span>
-    </div>
-    <div className="flex justify-between text-sm" style={{padding:'2px', with:'full', margin:'3px'}}>
-      <div className='flex'>
-      {
-        participants.map(({ image, name }) => (
-          <div key={name} className="flex items-center"  style={{color:'white', marginRight:'15px', fontSize:'13px', fontWeight:'bold'}}>
-            <div style={{padding:'2px'}}>
-              {image? <img className="w-12 h-12" src={image} alt={name} /> : <></>}
-              
-            </div>
-            <span className="text-md">{name}</span>
+  if (parseFloat(startsAt) < minStartTime || parseFloat(startsAt)>maxStartTime) {
+    return(
+      <></>
+    )
+  }
+  else {
+    return (
+      <div className='box'>
+        <div className="flex justify-between text-sm"  style={{color:'white', width:'100%'}}>
+          <span>{sport.name}</span>
+          {/* <span>{league.country.name} &middot; {league.name}</span> */}
+          <span>{dayjs(startsAt * 1000).format('DD MMM HH:mm')}</span>
+        </div>
+        <div className="flex justify-between text-sm" style={{padding:'2px', with:'full', margin:'3px'}}>
+          <div className='flex'>
+          {
+            participants.map(({ image, name }) => (
+              <div key={name} className="flex items-center"  style={{color:'white', marginRight:'15px', fontSize:'13px', fontWeight:'bold'}}>
+                <div style={{padding:'2px'}}>
+                  {image? <img className="w-12 h-12" src={image} alt={name} /> : <></>}
+                  
+                </div>
+                <span className="text-md">{name}</span>
+              </div>
+            ))
+          }
           </div>
-        ))
-      }
+          <div className='justify-between text-sm'>
+          <div style={{width:'full'} } className="area">
+          {true? <Markets game={game} markets={markets? markets.slice(0,1): []}/>: <></>}
+          </div>
+                <div className='area'>
+                {true?
+                <div className="flex items-center" style={{padding:'2px', color:'white'}}>
+                      <Link href={`/games/${id}`} className='gamebutton'> {'MORE ⏭️'} </Link>
+                </div>: 
+                <></>
+          }
+          </div>
+                </div>
+                
+        </div>
       </div>
-      <div className='justify-between text-sm'>
-      <div style={{width:'full'} } className="area">
-      {true? <Markets game={game} markets={markets? markets.slice(0,1): []}/>: <></>}
-      </div>
-            <div className='area'>
-            {true?
-            <div className="flex items-center" style={{padding:'2px', color:'white'}}>
-                  <Link href={`/games/${id}`} className='gamebutton'> {'MORE ⏭️'} </Link>
-            </div>: 
-            <></>
-      }
-      </div>
-            </div>
-            
-    </div>
-  </div>
-)
+    )
+  }
+  
     }
 
 const spanStyle = {
@@ -162,10 +171,12 @@ const Slideshow = () => {
 export default function Home() {
   const [ betHist, setBestHist ] = useState(true) 
   const [theGame, setTheGame] = useState('Football');
-  const { loading, data } = useSportEvents('Baseball')
-  const { loading:loading1, data:data1 } = useSportEvents(theGame)
+  const [timeSelect, setTimeSelect] = useState('all');
+  const [minStartTime, setminStartTime] = useState(1);
+  const [maxStartTime, setmaxStartTime] = useState(2698011049988);
 
-  if (loading || loading1) {
+  const { loading:loading, data:data1 } = useSportEvents(theGame)
+  if (loading) {
     return <main style={{display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',}}>
@@ -189,7 +200,31 @@ export default function Home() {
     setTheGame(name)
   }
 
-  
+  function handleTimeChange(name) {
+    if(name==='All'){
+      setTimeSelect('All')
+      setminStartTime(0)
+      setmaxStartTime(2698011049988)
+    } else if (name==='1h') {
+      setTimeSelect('1h')
+      setminStartTime(Date.now()/1000)
+      setmaxStartTime(Date.now()/1000+60*60)
+    } else if (name==='6h') {
+    setTimeSelect('6h')
+    setminStartTime(Date.now()/1000)
+    setmaxStartTime(Date.now()/1000+6*60*60)
+  }else if (name==='Today') {
+    setTimeSelect('Today')
+    setminStartTime(Date.now()/1000)
+    setmaxStartTime(Date.now()/1000+24*60*60)
+  }else if (name==='Tomarrow') {
+    setTimeSelect('Tomarrow')
+    setminStartTime(Date.now()/1000+24*60*60)
+    setmaxStartTime(Date.now()/1000+48*60*60)
+  }
+  }
+
+  const time_list = ['All', '1h', '6h', 'Today', 'Tomarrow']
   return (
     
     <div style={{textAlign:'center'}}>
@@ -228,9 +263,19 @@ export default function Home() {
             </div>  
         ))}
       </div>
+      <div style={{textAlign:'center', boxShadow:'-1px -1px 3px 3px linear-gradient(to right bottom, #132133, #0D131C)', borderRadius:'10px', margin:'10px'}}>
+              {time_list.map((theTime) => (
+                
+                  <button className={theTime==timeSelect? 'gameTimebuttonactive': 'gameTimebutton'} onClick={() => handleTimeChange(theTime)}>
+                    {theTime}
+                  </button>
+                
+              ))}
+              
+      </div>
         {data1 &&
           data1.games.map((game) => (
-            <GameCard key={game.id} {...game} />
+            <GameCard key={game.id} {...game} {...{minStartTime, maxStartTime}}/>
           ))
         }
         </div>
