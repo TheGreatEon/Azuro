@@ -76,7 +76,7 @@ const Markets = ({ game, markets }) => {
 
 
 const GameCard = ({ id, sport, league, participants, startsAt, minStartTime, maxStartTime}) => {
-  const { loading, game, markets } = useSportEventsModified(id)
+  // const { loading, game, markets } = useSportEventsModified(id)
   const { account } = useEthers()
   if (parseFloat(startsAt) < minStartTime || parseFloat(startsAt)>maxStartTime) {
     return(
@@ -107,7 +107,7 @@ const GameCard = ({ id, sport, league, participants, startsAt, minStartTime, max
           </div>
           <div className='justify-between text-sm'>
           <div style={{width:'full'} } className="area">
-          {true? <Markets game={game} markets={markets? markets.slice(0,1): []}/>: <></>}
+          {/* {true? <Markets game={game} markets={markets? markets.slice(0,1): []}/>: <></>}
           </div>
                 <div className='area'>
                 {true?
@@ -115,7 +115,10 @@ const GameCard = ({ id, sport, league, participants, startsAt, minStartTime, max
                       <Link href={`/games/${id}`} className='gamebutton'> {'MORE ⏭️'} </Link>
                 </div>: 
                 <></>
-          }
+          } */}
+          <div className="flex items-center" style={{padding:'2px', color:'white'}}>
+                      <Link href={`/games/${id}`} className='gamebutton'> {'MORE ⏭️'} </Link>
+                </div>
           </div>
                 </div>
                 
